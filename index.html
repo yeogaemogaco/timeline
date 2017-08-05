@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>여개모각코 회고 타임라인</title>
+  <link rel="stylesheet" href="css/reset.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+  <!--<link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">-->
+  <script src="https://use.fontawesome.com/e4c31d9e78.js"></script>
+
+  <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+
+</head>
+
+<body>
+
+<span class="first">
+			여개모각코 회고 타임라인
+			<!--<span class="fa fa-edit new"></span>-->
+		</span>
+<ul id="timeline" class="timeline">
+  <li v-for="item in items">
+    <div class="avatar">
+      <img :src="item.avatar">
+      <div class="hover">
+        <div class="fa fa-github fa-2x"></div>
+      </div>
+    </div>
+    <div class="bubble-container">
+      <div class="bubble">
+        <!--<div class="retweet">-->
+          <!--<div class="icon-retweet"></div>-->
+        <!--</div>-->
+        <h3>@{{item.githubId}}</h3> {{item.date}}<br />
+        <div>
+          <h4>* 목표</h4>
+          {{item.goal}}
+        </div>
+          <div>
+          <h4>* 회고</h4>
+          {{item.review}}
+        </div>
+
+        <div class="over-bubble">
+          <div class="fa fa-envelope action"></div>
+          <div class="fa fa-github action"></div>
+          <div class="fa fa-star"></div>
+        </div>
+      </div>
+
+      <div class="arrow"></div>
+    </div>
+  </li>
+</ul>
+
+<script>
+  var demoList = new Vue({
+    el: '#timeline',
+    data: {
+      items: []
+    },
+    created: function () {
+      this.fetchData();
+    },
+    methods: {
+      fetchData: function () {
+        var _this = this;
+        $.getJSON('data/alphateam.json', function(data) {
+            _this.items = data.diary;
+          }
+        );
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
