@@ -35,7 +35,7 @@
         <!--<div class="retweet">-->
           <!--<div class="icon-retweet"></div>-->
         <!--</div>-->
-        <h3>@{{item.githubId}}</h3> {{item.date}}<br />
+        <h3>@{{item.github}}</h3> {{item.date}}<br />
         <div>
           <h4>* 목표</h4>
           {{item.goal}}
@@ -70,6 +70,7 @@
       fetchData: function () {
         var _this = this;
         $.getJSON('data/alphateam.json', function(data) {
+             console.log(data);
             _this.items = data.diary;
           }
         );
