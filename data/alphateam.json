@@ -70,7 +70,7 @@
         "avatar" : "images/suhyunjeon.jpg",
         "name": "케일라",
         "goal": "- json 파일을 읽어와서 화면에 뿌려주기 - vuejs의 TODO 예제를 이용하여 input 만들어 보기",
-        "review": "",
+        "review": "- 화면에 뿌려주는 작업까지 마쳤고, 다음엔 컴포넌트로 등록해서 좀 더 다듬는 작업이 필요, 목표와 회고를 분할하는 UI추가할 것",
         "tags": "회고, 목표"
       }
     ]
