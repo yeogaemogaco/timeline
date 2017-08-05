@@ -8,7 +8,6 @@
 
   <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
-  <!--<link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">-->
   <script src="https://use.fontawesome.com/e4c31d9e78.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://unpkg.com/vue"></script>
@@ -16,67 +15,67 @@
 </head>
 
 <body>
-
-<span class="first">
-			여개모각코 회고 타임라인
-			<!--<span class="fa fa-edit new"></span>-->
-		</span>
-<ul id="timeline" class="timeline">
-  <li v-for="item in items">
-    <div class="avatar">
-      <img :src="item.avatar">
-      <div class="hover">
-        <div class="fa fa-github fa-2x"></div>
-      </div>
-    </div>
-    <div class="bubble-container">
-      <div class="bubble">
-        <!--<div class="retweet">-->
-          <!--<div class="icon-retweet"></div>-->
-        <!--</div>-->
-        <h3>@{{item.github}}</h3> {{item.date}}<br />
-        <div>
-          <h4>* 목표</h4>
-          {{item.goal}}
-        </div>
-          <div>
-          <h4>* 회고</h4>
-          {{item.review}}
-        </div>
-
-        <div class="over-bubble">
-          <div class="fa fa-envelope action"></div>
-          <div class="fa fa-github action"></div>
-          <div class="fa fa-star"></div>
+  <span class="first">여개모각코 회고 타임라인</span>
+  <ul id="timeline" class="timeline">
+    <li v-for="item in items">
+      <div class="avatar">
+        <img :src="item.avatar">
+        <div class="hover">
+          <i class="fa fa-github fa-2x"></i>
         </div>
       </div>
+      <div class="bubble-container">
+        <div class="bubble">
+          <h3 class="pink-color">@{{item.github}}</h3> {{item.date}}<br />
+          <div >
+            <div class="bottom-line">
+              <h4><i class="fa fa-check"></i> 목표</h4>
+              <div>{{item.goal}}</div>
+            </div>
+            <div>
+              <h4><i class="fa fa-check"></i> 회고</h4>
+              <div>{{item.review}}</div>
+            </div>
+            <div class="over-bubble">
+              <i class="fa fa-envelope action"></i>
+              <i class="fa fa-github action"></i>
+              <i class="fa fa-star"></i>
+            </div>
+          </div>
+        </div>
 
-      <div class="arrow"></div>
-    </div>
-  </li>
-</ul>
+        <div class="arrow"></div>
+      </div>
+    </li>
+  </ul>
 
-<script>
-  var demoList = new Vue({
-    el: '#timeline',
-    data: {
-      items: []
-    },
-    created: function () {
-      this.fetchData();
-    },
-    methods: {
-      fetchData: function () {
-        var _this = this;
-        $.getJSON('data/alphateam.json', function(data) {
-             console.log(data);
-            _this.items = data.diary;
-          }
-        );
+  <script>
+    var timeline = new Vue({
+      el: '#timeline',
+      data: {
+        items: []
+      },
+      created: function () {
+        this.fetchData();
+      },
+      methods: {
+        fetchData: function () {
+          var _this = this;
+          $.getJSON('data/alphateam.json', function (data) {
+              var diaryList = data.diary;
+              // Order by descending
+              diaryList.sort(function (a, b) {
+                var dateA = new Date(a.date);
+                var dateB = new Date(b.date);
+                return dateB.valueOf() - dateA.valueOf()
+              });
+              _this.items = diaryList;
+            }
+          );
+        }
       }
-    }
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
