@@ -6,3 +6,6 @@
 
 ## Phase#2
 - input form을 이용하여 실제 입력이 가능하게 하기
+
+## Phase#3
+- To-Be
