@@ -15,46 +15,16 @@
   <script src="js/firebase-init.js"></script>
   <script>
 
-    var userInfo;
     var timelineList = [];
-
-    var auth = firebase.auth();
-    var database = firebase.database();
-    var authProvider = new firebase.auth.FacebookAuthProvider();
-
-    // 인증여부
-    auth.onAuthStateChanged(function (user) {
-      if (user) {
-        // 인증성공
-        userInfo = user;
-        database
-          .ref('timeline/' + userInfo.uid)
-          .on('child_added', function (data) {
-            item = data.val();
-            item['key'] = data.key;
-            console.log(item);
-            timelineList.push(item);
-          });
-      } else {
-        // 인증실패
-        auth.signInWithPopup(authProvider);
-      }
-    });
-
-    function addTimeline(timelineData) {
-      // 인증여부
-      auth.onAuthStateChanged(function (user) {
-        if (user) {
-          // 인증성공
-          userInfo = user;
-          var timelineRef = database.ref('timeline/' + userInfo.uid);
-          timelineRef.push(timelineData);
-        } else {
-          // 인증실패
-          auth.signInWithPopup(authProvider);
-        }
+    firebase
+      .database()
+      .ref('timeline')
+      .on('child_added', function (data) {
+        item = data.val();
+        item['key'] = data.key;
+        console.log(item);
+        timelineList.push(item);
       });
-    }
 
   </script>
 </head>
